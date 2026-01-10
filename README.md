@@ -2,6 +2,10 @@
 
 A modern, responsive portfolio website built with React, Vite, and Tailwind CSS. Features smooth animations, dark mode design, and a fully responsive layout.
 
+## 🚀 Live Demo
+
+**[View Portfolio →](portfolio-nine-liart-90.vercel.app)**
+
 ## Features
 
 -  Modern, clean design with smooth animations
