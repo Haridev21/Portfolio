@@ -1,5 +1,54 @@
 import { useEffect } from 'react'
-import { ExternalLink, Github, ArrowRight, FolderKanban } from 'lucide-react'
+import { Github, ArrowUpRight, FolderKanban, ExternalLink } from 'lucide-react'
+
+// Language color mapping (matches GitHub's language colors)
+const languageColors = {
+  JavaScript: '#f1e05a',
+  TypeScript: '#3178c6',
+  Python: '#3572A5',
+  Java: '#b07219',
+  Dart: '#00B4AB',
+  C: '#555555',
+  'C++': '#f34b7d',
+  HTML: '#e34c26',
+  CSS: '#563d7c',
+  Makefile: '#427819',
+  Shell: '#89e051',
+  Kotlin: '#A97BFF',
+  Swift: '#F05138',
+  Go: '#00ADD8',
+  Rust: '#dea584',
+}
+
+const projects = [
+  {
+    id: 1,
+    name: 'Rail-Wallah – Railway Passenger Support System',
+    description: 'Engineered a cross-platform mobile app (Flutter + Flask) providing unified access to PNR tracking, live train schedules, complaint management, and interactive 3D station navigation. Designed an Intelligent Route Finder using a Modified Dijkstra\'s Algorithm to compute optimal and fallback railway routes. Used Firebase Firestore with RapidAPI and ConfirmTkt integration for real-time data.',
+    language: 'Dart',
+    liveUrl: '',
+    githubUrl: 'https://github.com/Haridev21/rail-wallah',
+    topics: ['flutter', 'flask', 'firebase', 'rapidapi'],
+  },
+  {
+    id: 2,
+    name: 'Smart Environment Control System',
+    description: 'Developed an Arduino and Flask-based monitoring system integrated with OpenWeather API. Built a real-time dashboard displaying environmental data and automated suggestions.',
+    language: 'JavaScript',
+    liveUrl: '',
+    githubUrl: 'https://github.com/Haridev21/smart-environment-control-system',
+    topics: ['arduino', 'flask', 'openweather-api', 'iot'],
+  },
+  {
+    id: 3,
+    name: 'Smart Door Lock System',
+    description: 'Designed a Bluetooth-enabled smart door lock using Arduino Mega and HC-05. Developed a Flutter mobile application with Firebase Authentication for lock control.',
+    language: 'Dart',
+    liveUrl: '',
+    githubUrl: 'https://github.com/Haridev21/SmartDoorLock_Application',
+    topics: ['flutter', 'arduino', 'firebase', 'bluetooth'],
+  },
+]
 
 const Projects = () => {
   useEffect(() => {
@@ -10,7 +59,7 @@ const Projects = () => {
             setTimeout(() => {
               entry.target.classList.remove('opacity-0')
               entry.target.classList.add('fade-in-up')
-            }, index * 100)
+            }, index * 80)
           }
         })
       },
@@ -25,170 +74,108 @@ const Projects = () => {
     }
   }, [])
 
-  const projects = [
-    {
-      id: 1,
-      title: 'Gender Differences in Dementia Prediction',
-      description: 'Built gender-specific dementia prediction models using XGBoost and SVM on OASIS-1 and Kaggle datasets with 95% accuracy. Applied SHAP for model interpretability, identifying critical indicators like MMSE, SES, nWBV, Education, and Depression Status.',
-      image: '🧠',
-      technologies: ['Python', 'XGBoost', 'SVM', 'SHAP', 'scikit-learn', 'pandas'],
-      liveUrl: '#',
-      githubUrl: 'https://github.com/Haridev21',
-      featured: true,
-    },
-    {
-      id: 2,
-      title: 'Smart Environment Control System',
-      description: 'Developed a smart college environment control system integrating Arduino sensors and OpenWeather API for real-time monitoring. Built Flask-based web UI visualizing temperature and light data with automated environmental suggestions.',
-      image: '🌡️',
-      technologies: ['Arduino', 'Flask', 'Python', 'OpenWeather API', 'IoT'],
-      liveUrl: '#',
-      githubUrl: 'https://github.com/Haridev21',
-      featured: false,
-    },
-    {
-      id: 3,
-      title: 'Smart Door Lock System',
-      description: 'Designed a Bluetooth-enabled smart door lock using Arduino Mega and HC-05. Developed mobile app with Firebase authentication supporting real-time lock/unlock and password management with LCD feedback.',
-      image: '🔐',
-      technologies: ['Flutter', 'Arduino', 'Firebase', 'Bluetooth', 'C++'],
-      liveUrl: '#',
-      githubUrl: 'https://github.com/Haridev21/SmartDoorLock_Application',
-      featured: false,
-    },
-    {
-      id: 4,
-      title: 'Study Assistant Chatbot',
-      description: 'Built an AI chatbot for KTU syllabus assistance using Flutter and integrated with Ollama on a local server. Designed features for summarization and Q&A, completed within an 18-hour hackathon (TinkerHub).',
-      image: '🤖',
-      technologies: ['Flutter', 'Dart', 'Ollama', 'AI', 'Natural Language Processing'],
-      liveUrl: '#',
-      githubUrl: 'https://github.com/Haridev21',
-      featured: false,
-    },
-    {
-      id: 5,
-      title: 'To-Do List App (Flutter)',
-      description: 'Developed a cross-platform task management app using Flutter and Dart. Integrated SQLite for persistent storage with CRUD functionality, task categorization, and prioritization features.',
-      image: '📋',
-      technologies: ['Flutter', 'Dart', 'SQLite', 'Mobile Development'],
-      liveUrl: '#',
-      githubUrl: 'https://github.com/Haridev21',
-      featured: false,
-    },
-    {
-      id: 6,
-      title: 'RecipeQuest App',
-      description: 'A mobile application for discovering and managing recipes. Currently working on this project to help users explore culinary delights with an intuitive interface.',
-      image: '🍳',
-      technologies: ['Flutter', 'Dart', 'Firebase', 'Mobile Development'],
-      liveUrl: '#',
-      githubUrl: 'https://github.com/Haridev21',
-      featured: false,
-    },
-  ]
-
   return (
     <section id="projects" className="section-padding relative bg-slate-50">
       <div className="container-custom">
         {/* Section Header */}
-        <div className="text-center mb-20">
-          <div className="inline-flex items-center gap-2 px-4 py-2 bg-white rounded-full mb-6 shadow-sm">
-            <FolderKanban className="w-4 h-4 text-slate-600" />
+        <div className="text-center mb-16">
+          <div className="inline-flex items-center gap-2 px-4 py-2 bg-white rounded-full mb-6 shadow-sm border border-slate-100">
+            <FolderKanban className="w-4 h-4 text-slate-500" />
             <span className="text-sm text-slate-600 font-medium">Portfolio</span>
           </div>
           <h2 className="text-4xl md:text-5xl lg:text-6xl font-display font-bold mb-6">
             <span className="text-slate-900">Featured</span>
             <span className="block text-slate-600 mt-2">Projects</span>
           </h2>
-          <p className="text-lg text-slate-600 max-w-2xl mx-auto">
-            A collection of projects showcasing my skills and passion for creating exceptional digital experiences
+          <p className="text-lg text-slate-500 max-w-2xl mx-auto">
+            A collection of projects showcasing my skills and passion for creating exceptional digital experiences.
           </p>
         </div>
 
-        {/* Unique Grid Layout - Asymmetric */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {/* Project Cards Grid */}
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
           {projects.map((project) => (
-            <div
+            <a
               key={project.id}
-              className={`project-card opacity-0 clean-card rounded-2xl overflow-hidden ${
-                project.featured ? 'md:col-span-2' : ''
-              }`}
+              href={project.githubUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="project-card opacity-0 group block rounded-xl border border-slate-200 bg-white p-5 hover:border-slate-300 hover:shadow-md transition-all duration-300"
             >
-              {/* Project Header */}
-              <div
-                className={`relative overflow-hidden bg-gradient-to-br from-slate-100 to-slate-50 ${
-                  project.featured ? 'h-64' : 'h-48'
-                }`}
-              >
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <div
-                    className={`${
-                      project.featured ? 'text-9xl' : 'text-7xl'
-                    } transform group-hover:scale-110 transition-transform duration-500`}
-                  >
-                    {project.image}
-                  </div>
+              {/* Title Row */}
+              <div className="flex items-start justify-between gap-3 mb-2">
+                <div className="flex items-center gap-2 min-w-0">
+                  <Github className="w-4 h-4 text-slate-400 flex-shrink-0" />
+                  <h3 className="text-[15px] font-semibold text-slate-900 group-hover:text-blue-600 transition-colors truncate">
+                    {project.name}
+                  </h3>
                 </div>
-
-                {/* Featured Badge */}
-                {project.featured && (
-                  <div className="absolute top-6 left-6 px-4 py-2 bg-white rounded-xl shadow-sm border border-slate-200">
-                    <span className="text-xs font-semibold text-slate-700 uppercase tracking-wider">
-                      Featured
-                    </span>
-                  </div>
-                )}
+                <ArrowUpRight className="w-4 h-4 text-slate-300 group-hover:text-blue-500 transition-all duration-300 flex-shrink-0 group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
               </div>
 
-              {/* Project Content */}
-              <div className="p-6 space-y-4">
-                <div>
-                  <h3 className="text-xl font-display font-bold mb-2 text-slate-900 group-hover:text-slate-700 transition-colors">
-                    {project.title}
-                  </h3>
-                  <p className="text-slate-600 text-sm leading-relaxed line-clamp-3">
-                    {project.description}
-                  </p>
-                </div>
+              {/* Description */}
+              <p className="text-[13px] text-slate-500 leading-relaxed mb-4 line-clamp-3 min-h-[3.75rem]">
+                {project.description}
+              </p>
 
-                {/* Technologies */}
-                <div className="flex flex-wrap gap-2 pt-2">
-                  {project.technologies.map((tech, index) => (
+              {/* Topics */}
+              {project.topics.length > 0 && (
+                <div className="flex flex-wrap gap-1.5 mb-4">
+                  {project.topics.slice(0, 4).map((topic, i) => (
                     <span
-                      key={index}
-                      className="px-3 py-1 bg-slate-100 text-xs text-slate-600 rounded-lg border border-slate-200 font-medium"
+                      key={i}
+                      className="px-2 py-0.5 text-[11px] font-medium text-blue-700 bg-blue-50 rounded-full border border-blue-100"
                     >
-                      {tech}
+                      {topic}
                     </span>
                   ))}
                 </div>
+              )}
 
-                {/* Links */}
-                <div className="flex items-center justify-between pt-4 border-t border-slate-200">
-                  <a
-                    href={project.liveUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex items-center gap-2 text-blue-600 hover:text-blue-700 transition-colors text-sm font-semibold group/link"
+              {/* Footer: Language, Live Demo */}
+              <div className="flex items-center gap-4 pt-3 border-t border-slate-100">
+                {project.language && (
+                  <span className="flex items-center gap-1.5 text-xs text-slate-600">
+                    <span
+                      className="w-2.5 h-2.5 rounded-full flex-shrink-0"
+                      style={{
+                        backgroundColor: languageColors[project.language] || '#8b8b8b',
+                      }}
+                    />
+                    {project.language}
+                  </span>
+                )}
+                <span className="flex-1" />
+                {project.liveUrl && project.liveUrl !== '#' && (
+                  <span
+                    onClick={(e) => {
+                      e.preventDefault()
+                      e.stopPropagation()
+                      window.open(project.liveUrl, '_blank')
+                    }}
+                    className="flex items-center gap-1 text-xs text-emerald-600 hover:text-emerald-700 font-medium cursor-pointer"
                   >
-                    <ExternalLink size={16} />
-                    Live Demo
-                    <ArrowRight className="group-hover/link:translate-x-1 transition-transform" size={14} />
-                  </a>
-                  <a
-                    href={project.githubUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex items-center gap-2 text-slate-600 hover:text-slate-900 transition-colors text-sm font-semibold"
-                  >
-                    <Github size={16} />
-                    Code
-                  </a>
-                </div>
+                    <ExternalLink className="w-3 h-3" />
+                    Demo
+                  </span>
+                )}
               </div>
-            </div>
+            </a>
           ))}
+        </div>
+
+        {/* View all on GitHub */}
+        <div className="text-center mt-10">
+          <a
+            href="https://github.com/Haridev21?tab=repositories"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 px-5 py-2.5 text-sm font-medium text-slate-600 bg-white border border-slate-200 rounded-full hover:border-slate-300 hover:text-slate-900 hover:shadow-sm transition-all duration-300"
+          >
+            <Github className="w-4 h-4" />
+            View all repositories
+            <ArrowUpRight className="w-3.5 h-3.5" />
+          </a>
         </div>
       </div>
     </section>

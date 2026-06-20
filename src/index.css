@@ -121,5 +121,24 @@
   .stagger-2 { animation-delay: 0.2s; }
   .stagger-3 { animation-delay: 0.3s; }
   .stagger-4 { animation-delay: 0.4s; }
+
+  /* Skill icon chips */
+  .skill-icon-chip {
+    @apply flex items-center gap-2.5 px-4 py-2.5 bg-slate-50 rounded-xl border border-slate-100;
+    transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .skill-icon-chip:hover {
+    @apply bg-white shadow-md border-slate-200;
+    transform: translateY(-2px);
+  }
+
+  .skill-icon-wrapper {
+    @apply w-8 h-8 flex items-center justify-center flex-shrink-0;
+  }
+
+  .skill-icon-label {
+    @apply text-sm font-semibold text-slate-700 whitespace-nowrap;
+  }
 }
 

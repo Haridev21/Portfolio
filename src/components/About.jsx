@@ -12,6 +12,7 @@ const About = () => {
     '/images/photo_3.jpeg',
     '/images/photo_4.jpeg',
     '/images/photo_5.jpeg',
+    '/images/photo_6.jpeg',
   ]
 
   // Cycle through photos every 5.5 seconds

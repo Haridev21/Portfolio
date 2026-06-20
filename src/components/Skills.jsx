@@ -1,5 +1,91 @@
 import { useEffect } from 'react'
-import { Code2, Database, Cloud, Smartphone, Settings, Shield } from 'lucide-react'
+import { Shield } from 'lucide-react'
+
+// Technology icon URLs from devicons CDN
+const techIcons = {
+  // Programming Languages
+  'Python': 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/python/python-original.svg',
+  'Java': 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/java/java-original.svg',
+  'C': 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/c/c-original.svg',
+  'JavaScript': 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/javascript/javascript-original.svg',
+  'Dart': 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/dart/dart-original.svg',
+  'HTML': 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/html5/html5-original.svg',
+  'CSS': 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/css3/css3-original.svg',
+
+  // Mobile
+  'Flutter': 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/flutter/flutter-original.svg',
+  'Android': 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/android/android-original.svg',
+
+  // Databases
+  'SQLite': 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/sqlite/sqlite-original.svg',
+  'MySQL': 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/mysql/mysql-original.svg',
+  'Firebase': 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/firebase/firebase-original.svg',
+  'Supabase': 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/supabase/supabase-original.svg',
+
+  // Web
+  'Flask': 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/flask/flask-original.svg',
+  'React': 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/react/react-original.svg',
+
+  // ML / Data
+  'scikit-learn': 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/scikitlearn/scikitlearn-original.svg',
+  'pandas': 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/pandas/pandas-original.svg',
+  'XGBoost': 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/python/python-original.svg',
+  'NumPy': 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/numpy/numpy-original.svg',
+
+  // IoT
+  'Arduino': 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/arduino/arduino-original.svg',
+
+  // Tools
+  'Git': 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/git/git-original.svg',
+  'GitHub': 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/github/github-original.svg',
+  'VS Code': 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/vscode/vscode-original.svg',
+  'Linux': 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/linux/linux-original.svg',
+}
+
+const skillCategories = [
+  {
+    id: 'programming',
+    title: 'Programming Languages',
+    color: 'from-blue-500 to-cyan-400',
+    skills: ['Python', 'Java', 'C', 'JavaScript', 'Dart'],
+  },
+  {
+    id: 'mobile',
+    title: 'Mobile Development',
+    color: 'from-purple-500 to-pink-400',
+    skills: ['Flutter', 'Dart', 'Android', 'Java'],
+  },
+  {
+    id: 'web',
+    title: 'Web Development',
+    color: 'from-orange-500 to-rose-400',
+    skills: ['HTML', 'CSS', 'JavaScript', 'Flask', 'React'],
+  },
+  {
+    id: 'database',
+    title: 'Databases',
+    color: 'from-indigo-500 to-blue-400',
+    skills: ['SQLite', 'MySQL', 'Firebase', 'Supabase'],
+  },
+  {
+    id: 'ml',
+    title: 'Machine Learning',
+    color: 'from-green-500 to-emerald-400',
+    skills: ['scikit-learn', 'pandas', 'XGBoost', 'NumPy'],
+  },
+  {
+    id: 'iot',
+    title: 'IoT & Embedded',
+    color: 'from-amber-500 to-yellow-400',
+    skills: ['Arduino', 'Python', 'C'],
+  },
+  {
+    id: 'tools',
+    title: 'Tools & Platforms',
+    color: 'from-slate-600 to-slate-400',
+    skills: ['Git', 'GitHub', 'VS Code', 'Linux', 'Firebase'],
+  },
+]
 
 const Skills = () => {
   useEffect(() => {
@@ -15,93 +101,13 @@ const Skills = () => {
       { threshold: 0.1 }
     )
 
-    const skillCategories = document.querySelectorAll('.skill-category')
-    skillCategories.forEach((category) => observer.observe(category))
+    const skillCards = document.querySelectorAll('.skill-category')
+    skillCards.forEach((card) => observer.observe(card))
 
     return () => {
-      skillCategories.forEach((category) => observer.unobserve(category))
+      skillCards.forEach((card) => observer.unobserve(card))
     }
   }, [])
-
-  const skillCategories = [
-    {
-      id: 'mobile',
-      title: 'Mobile Development',
-      icon: <Smartphone className="text-purple-500" size={28} />,
-      skills: [
-        { name: 'Flutter', level: 85 },
-        { name: 'Dart', level: 85 },
-        { name: 'Android', level: 75 },
-        { name: 'Java', level: 75 },
-      ],
-    },
-    {
-      id: 'database',
-      title: 'Databases',
-      icon: <Database className="text-indigo-500" size={28} />,
-      skills: [
-        { name: 'SQLite', level: 80 },
-        { name: 'MySQL', level: 80 },
-        { name: 'Firebase', level: 85 },
-        { name: 'Supabase', level: 75 },
-      ],
-    },
-    {
-      id: 'programming',
-      title: 'Programming Languages',
-      icon: <Code2 className="text-blue-500" size={28} />,
-      skills: [
-        { name: 'Python', level: 85 },
-        { name: 'Java', level: 75 },
-        { name: 'C', level: 80 },
-        { name: 'JavaScript', level: 80 },
-      ],
-    },
-    {
-      id: 'web',
-      title: 'Web Development',
-      icon: <Cloud className="text-pink-500" size={28} />,
-      skills: [
-        { name: 'HTML', level: 90 },
-        { name: 'CSS', level: 85 },
-        { name: 'JavaScript', level: 80 },
-        { name: 'Flask', level: 75 },
-      ],
-    },
-    {
-      id: 'ml',
-      title: 'Machine Learning',
-      icon: <Settings className="text-green-500" size={28} />,
-      skills: [
-        { name: 'scikit-learn', level: 80 },
-        { name: 'pandas', level: 85 },
-        { name: 'XGBoost', level: 80 },
-        { name: 'SVM', level: 75 },
-        { name: 'SHAP', level: 75 },
-      ],
-    },
-    {
-      id: 'iot',
-      title: 'IoT & Embedded',
-      icon: <Settings className="text-orange-500" size={28} />,
-      skills: [
-        { name: 'Arduino', level: 85 },
-        { name: 'Serial Communication', level: 80 },
-        { name: 'Embedded Systems', level: 80 },
-      ],
-    },
-    {
-      id: 'tools',
-      title: 'Tools & APIs',
-      icon: <Cloud className="text-slate-600" size={28} />,
-      skills: [
-        { name: 'Git', level: 90 },
-        { name: 'GitHub', level: 90 },
-        { name: 'OpenWeather API', level: 75 },
-        { name: 'Flask', level: 75 },
-      ],
-    },
-  ]
 
   return (
     <section id="skills" className="section-padding relative bg-white">
@@ -121,37 +127,43 @@ const Skills = () => {
           </p>
         </div>
 
-        {/* Clean Grid Layout */}
+        {/* Skills Grid */}
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {skillCategories.map((category) => (
+          {skillCategories.map((category, catIdx) => (
             <div
               key={category.id}
-              className="skill-category opacity-0 clean-card rounded-2xl p-6"
+              className="skill-category opacity-0 clean-card rounded-2xl p-6 group hover:shadow-lg transition-all duration-300"
+              style={{ animationDelay: `${catIdx * 80}ms` }}
             >
               {/* Category Header */}
-              <div className="flex items-center gap-4 mb-8">
-                <div className="p-3 bg-slate-100 rounded-xl">
-                  {category.icon}
-                </div>
-                <h3 className="text-xl font-display font-bold text-slate-900">{category.title}</h3>
+              <div className="flex items-center gap-3 mb-6">
+                <div className={`w-1.5 h-8 rounded-full bg-gradient-to-b ${category.color}`} />
+                <h3 className="text-lg font-display font-bold text-slate-900">{category.title}</h3>
               </div>
 
-              {/* Skills List */}
-              <div className="space-y-5">
-                {category.skills.map((skill, index) => (
-                  <div key={index}>
-                    <div className="flex justify-between items-center mb-2">
-                      <span className="text-slate-700 font-medium text-sm">{skill.name}</span>
-                      <span className="text-slate-500 text-xs font-semibold">
-                        {skill.level}%
-                      </span>
+              {/* Skill Icons Grid */}
+              <div className="flex flex-wrap gap-3">
+                {category.skills.map((skillName, index) => (
+                  <div
+                    key={`${category.id}-${skillName}-${index}`}
+                    className="skill-icon-chip"
+                    style={{ animationDelay: `${(catIdx * 80) + (index * 60)}ms` }}
+                  >
+                    <div className="skill-icon-wrapper">
+                      {techIcons[skillName] ? (
+                        <img
+                          src={techIcons[skillName]}
+                          alt={skillName}
+                          className="w-7 h-7 object-contain"
+                          loading="lazy"
+                        />
+                      ) : (
+                        <span className="text-lg font-bold text-slate-400">
+                          {skillName.charAt(0)}
+                        </span>
+                      )}
                     </div>
-                    <div className="relative w-full h-2 bg-slate-100 rounded-full overflow-hidden">
-                      <div
-                        className="absolute left-0 top-0 h-full bg-gradient-to-r from-blue-500 to-purple-500 rounded-full transition-all duration-1000 ease-out"
-                        style={{ width: `${skill.level}%` }}
-                      />
-                    </div>
+                    <span className="skill-icon-label">{skillName}</span>
                   </div>
                 ))}
               </div>

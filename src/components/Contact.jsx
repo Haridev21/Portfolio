@@ -1,5 +1,16 @@
 import { useState, useEffect, useRef } from 'react'
-import { Mail, MapPin, Phone, Github, Linkedin, MessageCircle, ArrowRight } from 'lucide-react'
+import emailjs from '@emailjs/browser'
+import { Mail, MapPin, Phone, Github, Linkedin, MessageCircle, ArrowRight, CheckCircle, AlertCircle } from 'lucide-react'
+
+// ─── EmailJS Credentials ────────────────────────────────────────────────────
+// Replace these three values with your real EmailJS credentials:
+// 1. Go to https://dashboard.emailjs.com → Email Services → your service → copy Service ID
+// 2. Go to Email Templates → your template → copy Template ID
+// 3. Go to Account → General → copy Public Key
+const EMAILJS_SERVICE_ID  = 'service_80l2xdd'
+const EMAILJS_TEMPLATE_ID = 'template_3t5dmll'
+const EMAILJS_PUBLIC_KEY  = 'dZ4zpTdYNGJj-LcyK'
+// ────────────────────────────────────────────────────────────────────────────
 
 const Contact = () => {
   const [formData, setFormData] = useState({
@@ -9,6 +20,7 @@ const Contact = () => {
   })
   const [errors, setErrors] = useState({})
   const [isSubmitting, setIsSubmitting] = useState(false)
+  const [submitStatus, setSubmitStatus] = useState(null) // 'success' | 'error' | null
   const contactRef = useRef(null)
 
   useEffect(() => {
@@ -61,19 +73,52 @@ const Contact = () => {
   const handleSubmit = async (e) => {
     e.preventDefault()
 
-    if (!validateForm()) {
-      return
-    }
+    if (!validateForm()) return
 
     setIsSubmitting(true)
+    setSubmitStatus(null)
 
-    setTimeout(() => {
-      console.log('Form submitted:', formData)
-      alert('Thank you for your message! I will get back to you soon.')
+    try {
+      // Fetch the sender's public IP address
+      let ipAddress = 'Unknown'
+      try {
+        const ipRes = await fetch('https://api.ipify.org?format=json')
+        const ipData = await ipRes.json()
+        ipAddress = ipData.ip
+      } catch {
+        // IP fetch failed silently — still send the email
+      }
+
+      // Send email via EmailJS
+      await emailjs.send(
+        EMAILJS_SERVICE_ID,
+        EMAILJS_TEMPLATE_ID,
+        {
+          from_name: formData.name,
+          from_email: formData.email,
+          message: formData.message,
+          ip_address: ipAddress,
+          sent_at: new Date().toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' }),
+        },
+        {
+          publicKey: EMAILJS_PUBLIC_KEY,
+        }
+      )
+
+      setSubmitStatus('success')
       setFormData({ name: '', email: '', message: '' })
       setErrors({})
+
+      // Auto-clear success message after 6 seconds
+      setTimeout(() => setSubmitStatus(null), 6000)
+    } catch (error) {
+      console.error('EmailJS error:', error)
+      console.error('EmailJS error status:', error?.status)
+      console.error('EmailJS error text:', error?.text)
+      setSubmitStatus('error')
+    } finally {
       setIsSubmitting(false)
-    }, 1000)
+    }
   }
 
   const handleChange = (e) => {
@@ -263,7 +308,7 @@ const Contact = () => {
               <button
                 type="submit"
                 disabled={isSubmitting}
-                className="w-full group px-8 py-4 bg-slate-900 hover:bg-slate-800 disabled:bg-slate-300 disabled:cursor-not-allowed text-white rounded-xl font-semibold transition-all duration-300 shadow-lg hover:shadow-xl flex items-center justify-center gap-2"
+                className="w-full group px-8 py-4 bg-slate-900 hover:bg-slate-800 disabled:bg-slate-400 disabled:cursor-not-allowed text-white rounded-xl font-semibold transition-all duration-300 shadow-lg hover:shadow-xl flex items-center justify-center gap-2"
               >
                 {isSubmitting ? (
                   <>
@@ -277,6 +322,28 @@ const Contact = () => {
                   </>
                 )}
               </button>
+
+              {/* Success Banner */}
+              {submitStatus === 'success' && (
+                <div className="flex items-start gap-3 p-4 bg-emerald-50 border border-emerald-200 rounded-xl animate-fadeIn">
+                  <CheckCircle className="w-5 h-5 text-emerald-600 flex-shrink-0 mt-0.5" />
+                  <div>
+                    <p className="text-sm font-semibold text-emerald-800">Message sent successfully!</p>
+                    <p className="text-xs text-emerald-700 mt-0.5">I'll get back to you at your email address soon.</p>
+                  </div>
+                </div>
+              )}
+
+              {/* Error Banner */}
+              {submitStatus === 'error' && (
+                <div className="flex items-start gap-3 p-4 bg-red-50 border border-red-200 rounded-xl animate-fadeIn">
+                  <AlertCircle className="w-5 h-5 text-red-600 flex-shrink-0 mt-0.5" />
+                  <div>
+                    <p className="text-sm font-semibold text-red-800">Failed to send message.</p>
+                    <p className="text-xs text-red-700 mt-0.5">Please try again or email me directly at haridevm84@gmail.com</p>
+                  </div>
+                </div>
+              )}
             </form>
           </div>
         </div>

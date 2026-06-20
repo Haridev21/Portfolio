@@ -69,8 +69,8 @@ const Hero = () => {
             </div>
 
             <p className="text-lg md:text-xl max-w-2xl leading-relaxed fade-in-up stagger-3" style={{ color: '#475569' }}>
-              Diploma graduate in Computer Science and Engineering, currently pursuing B.Tech in CSE. 
-              Enthusiastic Flutter developer with knowledge in embedded systems, machine learning, 
+              Diploma graduate in Computer Science and Engineering, currently pursuing B.Tech in CSE.
+              Enthusiastic Flutter developer with knowledge in embedded systems, machine learning,
               and integrating mobile apps with web platforms.
             </p>
 
@@ -83,7 +83,7 @@ const Hero = () => {
                 View My Work
                 <ArrowDown className="group-hover:translate-y-1 transition-transform" size={20} />
               </button>
-              <button 
+              <button
                 onClick={handleDownloadResume}
                 className="px-8 py-4 bg-white hover:bg-slate-50 text-slate-900 border-2 border-slate-200 hover:border-slate-300 rounded-xl font-semibold transition-all duration-300 flex items-center justify-center gap-2 shadow-sm hover:shadow-md"
               >
@@ -136,7 +136,7 @@ const Hero = () => {
                     </div>
                   )}
                 </div>
-                
+
                 {/* Decorative corner elements */}
                 <div className="absolute top-2 right-2 w-12 h-12 border-t-2 border-r-2 border-slate-300 rounded-tr-xl" />
                 <div className="absolute bottom-2 left-2 w-12 h-12 border-b-2 border-l-2 border-slate-300 rounded-bl-xl" />
