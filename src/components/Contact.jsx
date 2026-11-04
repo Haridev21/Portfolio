@@ -1,16 +1,5 @@
 import { useState, useEffect, useRef } from 'react'
-import emailjs from '@emailjs/browser'
-import { Mail, MapPin, Phone, Github, Linkedin, MessageCircle, ArrowRight, CheckCircle, AlertCircle } from 'lucide-react'
-
-// ─── EmailJS Credentials ────────────────────────────────────────────────────
-// Replace these three values with your real EmailJS credentials:
-// 1. Go to https://dashboard.emailjs.com → Email Services → your service → copy Service ID
-// 2. Go to Email Templates → your template → copy Template ID
-// 3. Go to Account → General → copy Public Key
-const EMAILJS_SERVICE_ID  = 'service_80l2xdd'
-const EMAILJS_TEMPLATE_ID = 'template_3t5dmll'
-const EMAILJS_PUBLIC_KEY  = 'dZ4zpTdYNGJj-LcyK'
-// ────────────────────────────────────────────────────────────────────────────
+import { Mail, MapPin, Phone, Github, Linkedin, MessageCircle, ArrowRight, CheckCircle, Copy, Check, ExternalLink } from 'lucide-react'
 
 const Contact = () => {
   const [formData, setFormData] = useState({
@@ -19,8 +8,8 @@ const Contact = () => {
     message: '',
   })
   const [errors, setErrors] = useState({})
-  const [isSubmitting, setIsSubmitting] = useState(false)
-  const [submitStatus, setSubmitStatus] = useState(null) // 'success' | 'error' | null
+  const [submitStatus, setSubmitStatus] = useState(null) // 'gmail' | 'mailto' | null
+  const [copied, setCopied] = useState(false)
   const contactRef = useRef(null)
 
   useEffect(() => {
@@ -62,63 +51,49 @@ const Contact = () => {
 
     if (!formData.message.trim()) {
       newErrors.message = 'Message is required'
-    } else if (formData.message.trim().length < 10) {
-      newErrors.message = 'Message must be at least 10 characters'
+    } else if (formData.message.trim().length < 5) {
+      newErrors.message = 'Message must be at least 5 characters'
     }
 
     setErrors(newErrors)
     return Object.keys(newErrors).length === 0
   }
 
-  const handleSubmit = async (e) => {
-    e.preventDefault()
+  const getEmailData = () => {
+    const subject = encodeURIComponent(`Portfolio Message from ${formData.name}`)
+    const body = encodeURIComponent(
+      `Hi Haridev,\n\n${formData.message}\n\n---\nFrom: ${formData.name}\nEmail: ${formData.email}`
+    )
+    return { subject, body }
+  }
 
+  const handleSendGmail = (e) => {
+    if (e) e.preventDefault()
     if (!validateForm()) return
 
-    setIsSubmitting(true)
-    setSubmitStatus(null)
+    const { subject, body } = getEmailData()
+    const gmailUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=haridevm84@gmail.com&su=${subject}&body=${body}`
+    window.open(gmailUrl, '_blank')
 
-    try {
-      // Fetch the sender's public IP address
-      let ipAddress = 'Unknown'
-      try {
-        const ipRes = await fetch('https://api.ipify.org?format=json')
-        const ipData = await ipRes.json()
-        ipAddress = ipData.ip
-      } catch {
-        // IP fetch failed silently — still send the email
-      }
+    setSubmitStatus('gmail')
+    setTimeout(() => setSubmitStatus(null), 6000)
+  }
 
-      // Send email via EmailJS
-      await emailjs.send(
-        EMAILJS_SERVICE_ID,
-        EMAILJS_TEMPLATE_ID,
-        {
-          from_name: formData.name,
-          from_email: formData.email,
-          message: formData.message,
-          ip_address: ipAddress,
-          sent_at: new Date().toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' }),
-        },
-        {
-          publicKey: EMAILJS_PUBLIC_KEY,
-        }
-      )
+  const handleSendMailto = (e) => {
+    if (e) e.preventDefault()
+    if (!validateForm()) return
 
-      setSubmitStatus('success')
-      setFormData({ name: '', email: '', message: '' })
-      setErrors({})
+    const { subject, body } = getEmailData()
+    window.location.href = `mailto:haridevm84@gmail.com?subject=${subject}&body=${body}`
 
-      // Auto-clear success message after 6 seconds
-      setTimeout(() => setSubmitStatus(null), 6000)
-    } catch (error) {
-      console.error('EmailJS error:', error)
-      console.error('EmailJS error status:', error?.status)
-      console.error('EmailJS error text:', error?.text)
-      setSubmitStatus('error')
-    } finally {
-      setIsSubmitting(false)
-    }
+    setSubmitStatus('mailto')
+    setTimeout(() => setSubmitStatus(null), 6000)
+  }
+
+  const handleCopyEmail = () => {
+    navigator.clipboard.writeText('haridevm84@gmail.com')
+    setCopied(true)
+    setTimeout(() => setCopied(false), 3000)
   }
 
   const handleChange = (e) => {
@@ -166,18 +141,43 @@ const Contact = () => {
             <div>
               <h3 className="text-2xl font-display font-bold mb-8 text-slate-900">Contact Information</h3>
               <div className="space-y-4">
+                {/* Email Card with direct Gmail link and Copy */}
                 <div className="group flex items-start gap-4 p-6 clean-card rounded-2xl">
                   <div className="p-3 bg-slate-100 rounded-xl group-hover:bg-slate-200 transition-colors">
                     <Mail className="text-slate-600" size={24} />
                   </div>
-                  <div>
+                  <div className="flex-1">
                     <h4 className="font-semibold text-slate-900 mb-1">Email</h4>
-                    <a
-                      href="mailto:haridevm84@gmail.com"
-                      className="text-slate-600 hover:text-slate-900 transition-colors"
-                    >
-                      haridevm84@gmail.com
-                    </a>
+                    <div className="flex flex-wrap items-center gap-2">
+                      <a
+                        href="https://mail.google.com/mail/?view=cm&fs=1&to=haridevm84@gmail.com"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-slate-600 hover:text-blue-600 transition-colors font-medium text-sm inline-flex items-center gap-1"
+                      >
+                        haridevm84@gmail.com
+                        <ExternalLink size={13} className="opacity-60" />
+                      </a>
+                      <button
+                        type="button"
+                        onClick={handleCopyEmail}
+                        className="px-2 py-0.5 text-xs bg-slate-100 hover:bg-slate-200 rounded-md text-slate-600 transition-colors inline-flex items-center gap-1"
+                        title="Copy to clipboard"
+                        aria-label="Copy to clipboard"
+                      >
+                        {copied ? (
+                          <>
+                            <Check size={12} className="text-emerald-500" />
+                            <span className="text-emerald-600 font-medium">Copied</span>
+                          </>
+                        ) : (
+                          <>
+                            <Copy size={12} />
+                            <span>Copy</span>
+                          </>
+                        )}
+                      </button>
+                    </div>
                   </div>
                 </div>
 
@@ -229,7 +229,7 @@ const Contact = () => {
 
           {/* Contact Form */}
           <div>
-            <form onSubmit={handleSubmit} className="space-y-6">
+            <form onSubmit={handleSendGmail} className="space-y-6">
               <div>
                 <label
                   htmlFor="name"
@@ -290,57 +290,78 @@ const Contact = () => {
                 <textarea
                   id="message"
                   name="message"
+                  rows={5}
                   value={formData.message}
                   onChange={handleChange}
-                  rows={6}
                   className={`w-full px-4 py-3 bg-white border rounded-xl focus:outline-none focus:ring-2 transition-all resize-none ${
                     errors.message
                       ? 'border-red-300 focus:ring-red-200 focus:border-red-400'
                       : 'border-slate-200 focus:border-blue-500 focus:ring-blue-200'
                   } text-slate-900 placeholder-slate-400`}
-                  placeholder="Your message here..."
+                  placeholder="Tell me about your project..."
                 />
                 {errors.message && (
                   <p className="mt-2 text-sm text-red-600">{errors.message}</p>
                 )}
               </div>
 
-              <button
-                type="submit"
-                disabled={isSubmitting}
-                className="w-full group px-8 py-4 bg-slate-900 hover:bg-slate-800 disabled:bg-slate-400 disabled:cursor-not-allowed text-white rounded-xl font-semibold transition-all duration-300 shadow-lg hover:shadow-xl flex items-center justify-center gap-2"
-              >
-                {isSubmitting ? (
-                  <>
-                    <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin" />
-                    Sending...
-                  </>
-                ) : (
-                  <>
-                    Send Message
-                    <ArrowRight className="group-hover:translate-x-1 transition-transform" size={20} />
-                  </>
-                )}
-              </button>
+              {/* Action Buttons: Gmail Primary + Default Mail Client Secondary */}
+              <div className="flex flex-col sm:flex-row gap-3">
+                <button
+                  type="button"
+                  onClick={handleSendGmail}
+                  className="flex-1 group px-6 py-4 bg-slate-900 hover:bg-slate-800 text-white rounded-xl font-semibold transition-all duration-300 shadow-lg hover:shadow-xl flex items-center justify-center gap-2"
+                >
+                  <Mail size={18} />
+                  Send via Gmail
+                  <ExternalLink size={16} className="opacity-70 group-hover:translate-x-0.5 transition-transform" />
+                </button>
 
-              {/* Success Banner */}
-              {submitStatus === 'success' && (
+                <button
+                  type="button"
+                  onClick={handleSendMailto}
+                  className="px-6 py-4 bg-white border border-slate-200 hover:border-slate-300 text-slate-700 rounded-xl font-medium transition-all duration-300 flex items-center justify-center gap-2"
+                  title="Open in your default desktop or mobile mail app"
+                >
+                  Other Mail App
+                </button>
+              </div>
+
+              {/* Direct Mail Shortcut */}
+              <div className="text-center pt-1">
+                <div className="inline-flex items-center gap-1.5 text-xs text-slate-500">
+                  <span>Direct email:</span>
+                  <a
+                    href="https://mail.google.com/mail/?view=cm&fs=1&to=haridevm84@gmail.com"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="font-semibold text-slate-700 hover:text-blue-600 transition-colors underline"
+                  >
+                    haridevm84@gmail.com
+                  </a>
+                  <button
+                    type="button"
+                    onClick={handleCopyEmail}
+                    className="p-1 hover:text-slate-700 text-slate-400 rounded transition-colors"
+                    title="Copy address"
+                    aria-label="Copy address"
+                  >
+                    {copied ? <Check size={12} className="text-emerald-500" /> : <Copy size={12} />}
+                  </button>
+                </div>
+              </div>
+
+              {/* Feedback Banner */}
+              {submitStatus && (
                 <div className="flex items-start gap-3 p-4 bg-emerald-50 border border-emerald-200 rounded-xl animate-fadeIn">
                   <CheckCircle className="w-5 h-5 text-emerald-600 flex-shrink-0 mt-0.5" />
                   <div>
-                    <p className="text-sm font-semibold text-emerald-800">Message sent successfully!</p>
-                    <p className="text-xs text-emerald-700 mt-0.5">I'll get back to you at your email address soon.</p>
-                  </div>
-                </div>
-              )}
-
-              {/* Error Banner */}
-              {submitStatus === 'error' && (
-                <div className="flex items-start gap-3 p-4 bg-red-50 border border-red-200 rounded-xl animate-fadeIn">
-                  <AlertCircle className="w-5 h-5 text-red-600 flex-shrink-0 mt-0.5" />
-                  <div>
-                    <p className="text-sm font-semibold text-red-800">Failed to send message.</p>
-                    <p className="text-xs text-red-700 mt-0.5">Please try again or email me directly at haridevm84@gmail.com</p>
+                    <p className="text-sm font-semibold text-emerald-800">
+                      {submitStatus === 'gmail' ? 'Opening Gmail compose window...' : 'Opening your mail client...'}
+                    </p>
+                    <p className="text-xs text-emerald-700 mt-0.5">
+                      Your message has been pre-filled for <strong>haridevm84@gmail.com</strong>.
+                    </p>
                   </div>
                 </div>
               )}
