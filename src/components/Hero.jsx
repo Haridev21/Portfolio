@@ -51,6 +51,17 @@ const Hero = () => {
         <div className="grid lg:grid-cols-12 gap-12 items-center">
           {/* Left Content - Unique Asymmetric Layout */}
           <div className="lg:col-span-7 space-y-8">
+            {/* Mobile-only avatar */}
+            <div className="lg:hidden -mb-2">
+              <img
+                src="/images/photo_1.jpeg"
+                alt="Haridev M"
+                className="w-24 h-24 sm:w-28 sm:h-28 rounded-full object-cover border-4 border-white shadow-lg ring-1 ring-slate-200"
+                style={{ objectPosition: '50% 20%' }}
+                onError={(e) => { e.currentTarget.style.display = 'none' }}
+              />
+            </div>
+
             {/* Badge */}
             <div className="inline-flex items-center gap-2 px-4 py-2 bg-slate-100 rounded-full mb-6 fade-in-up stagger-1">
               <span className="w-2 h-2 bg-blue-500 rounded-full animate-pulse" />
