@@ -70,16 +70,16 @@ const Hero = () => {
 
             {/* Main Heading - Unique Typography */}
             <div className="space-y-4 fade-in-up stagger-2">
-              <h1 className="text-5xl md:text-6xl lg:text-7xl font-display font-bold leading-tight" style={{ color: '#0f172a' }}>
-                <span className="block" style={{ color: '#0f172a' }}>Hello, I'm</span>
-                <span className="block mt-2" style={{ color: '#0f172a' }}>Haridev M</span>
-                <span className="block text-4xl md:text-5xl mt-4 font-normal" style={{ color: '#475569' }}>
+              <h1 className="text-5xl md:text-6xl lg:text-7xl font-display font-bold leading-tight text-slate-900">
+                <span className="block text-slate-900">Hello, I'm</span>
+                <span className="block mt-2 text-slate-900">Haridev M</span>
+                <span className="block text-4xl md:text-5xl mt-4 font-normal text-slate-600">
                   Full Stack Developer
                 </span>
               </h1>
             </div>
 
-            <p className="text-lg md:text-xl max-w-2xl leading-relaxed fade-in-up stagger-3" style={{ color: '#475569' }}>
+            <p className="text-lg md:text-xl max-w-2xl leading-relaxed fade-in-up stagger-3 text-slate-600">
               Diploma graduate in Computer Science and Engineering, currently pursuing B.Tech in CSE.
               Enthusiastic Flutter developer with knowledge in embedded systems, machine learning,
               and integrating mobile apps with web platforms.

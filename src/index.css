@@ -142,3 +142,374 @@
   }
 }
 
+/* ─────────────────────────────────────────────────────────────
+   Smooth Theme Transitions
+   ───────────────────────────────────────────────────────────── */
+body,
+section,
+main,
+nav,
+.clean-card,
+.skill-icon-chip,
+.glass-nav,
+input,
+textarea,
+button {
+  transition-property: background-color, color, border-color, box-shadow;
+  transition-duration: 0.25s;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ─────────────────────────────────────────────────────────────
+   Premium Dark Theme (Linear / Vercel Aesthetic)
+   ───────────────────────────────────────────────────────────── */
+
+/* Root Canvas */
+html.dark,
+html.dark body {
+  background-color: #09090b !important;
+  color: #f4f4f5 !important;
+}
+
+/* Sections: Cohesive dark canvas with subtle depth */
+.dark section.bg-white,
+.dark section#home,
+.dark section#about,
+.dark section#designs,
+.dark section#skills {
+  background-color: #09090b !important;
+  background-image: none !important;
+}
+
+.dark section.bg-slate-50,
+.dark section#experience,
+.dark section#projects,
+.dark section#certificates,
+.dark section#contact {
+  background-color: #0d0d10 !important;
+}
+
+/* Subtle Hero Grid */
+.dark section#home .opacity-\[0\.02\] {
+  opacity: 0.05 !important;
+  filter: invert(1);
+}
+
+/* Base Borders: Subtle hairline */
+.dark * {
+  border-color: rgba(255, 255, 255, 0.08);
+}
+
+.dark .border-slate-100 {
+  border-color: rgba(255, 255, 255, 0.08) !important;
+}
+
+.dark .border-slate-200 {
+  border-color: rgba(255, 255, 255, 0.1) !important;
+}
+
+.dark .border-slate-300 {
+  border-color: rgba(255, 255, 255, 0.16) !important;
+}
+
+.dark .border-neutral-200 {
+  border-color: rgba(255, 255, 255, 0.08) !important;
+}
+
+.dark .border-white {
+  border-color: rgba(255, 255, 255, 0.12) !important;
+}
+
+.dark .ring-slate-200 {
+  --tw-ring-color: rgba(255, 255, 255, 0.12) !important;
+}
+
+/* Cards & Surfaces */
+.dark .bg-white {
+  background-color: #121215 !important;
+}
+
+.dark .bg-slate-50 {
+  background-color: #16161a !important;
+}
+
+.dark .bg-slate-100 {
+  background-color: #1a1a20 !important;
+}
+
+.dark .bg-slate-200 {
+  background-color: #27272a !important;
+}
+
+/* Clean Cards with Subtle Glow on Hover */
+.dark .clean-card {
+  background-color: #121215 !important;
+  border: 1px solid rgba(255, 255, 255, 0.08) !important;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4) !important;
+}
+
+.dark .clean-card:hover {
+  border-color: rgba(255, 255, 255, 0.18) !important;
+  box-shadow: 0 12px 32px -4px rgba(0, 0, 0, 0.7), 0 0 16px -2px rgba(59, 130, 246, 0.08) !important;
+}
+
+/* Project Cards, Design Cards & Experience Cards */
+.dark .project-card,
+.dark .design-card,
+.dark .exp-card {
+  background-color: #121215 !important;
+  border-color: rgba(255, 255, 255, 0.08) !important;
+}
+
+.dark .project-card:hover,
+.dark .design-card:hover,
+.dark .exp-card:hover {
+  border-color: rgba(255, 255, 255, 0.2) !important;
+  box-shadow: 0 12px 32px -4px rgba(0, 0, 0, 0.6) !important;
+}
+
+/* Crisp Text Hierarchy */
+.dark .text-slate-900 {
+  color: #ffffff !important;
+}
+
+.dark .text-slate-700 {
+  color: #e4e4e7 !important;
+}
+
+.dark .text-slate-600 {
+  color: #a1a1aa !important;
+}
+
+.dark .text-slate-500 {
+  color: #71717a !important;
+}
+
+.dark .text-slate-400 {
+  color: #71717a !important;
+}
+
+/* Glass Navigation Bar */
+.dark .glass-nav {
+  background-color: rgba(9, 9, 11, 0.8) !important;
+  backdrop-filter: blur(16px) !important;
+  -webkit-backdrop-filter: blur(16px) !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08) !important;
+}
+
+/* Skill Chips */
+.dark .skill-icon-chip {
+  background-color: #141418 !important;
+  border: 1px solid rgba(255, 255, 255, 0.08) !important;
+}
+
+.dark .skill-icon-chip:hover {
+  background-color: #1c1c22 !important;
+  border-color: rgba(255, 255, 255, 0.2) !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4) !important;
+}
+
+.dark .skill-icon-label {
+  color: #f4f4f5 !important;
+}
+
+/* Badges & Number Indicators */
+.dark .number-badge {
+  background-color: #1c1c22 !important;
+  color: #a1a1aa !important;
+}
+
+.dark .inline-flex.rounded-full {
+  border-color: rgba(255, 255, 255, 0.08);
+}
+
+/* High-Contrast Modern Action Buttons (Linear/Apple/Vercel Style) */
+.dark button.bg-slate-900,
+.dark a.bg-slate-900 {
+  background-color: #fafafa !important;
+  color: #09090b !important;
+  border: 1px solid #ffffff !important;
+  box-shadow: 0 0 20px rgba(255, 255, 255, 0.15) !important;
+}
+
+.dark button.bg-slate-900:hover,
+.dark a.bg-slate-900:hover {
+  background-color: #e4e4e7 !important;
+  color: #000000 !important;
+  box-shadow: 0 0 25px rgba(255, 255, 255, 0.25) !important;
+}
+
+/* Secondary Buttons */
+.dark button.border-2.border-slate-200,
+.dark a.border.border-slate-200 {
+  background-color: #121215 !important;
+  color: #f4f4f5 !important;
+  border-color: rgba(255, 255, 255, 0.12) !important;
+}
+
+.dark button.border-2.border-slate-200:hover,
+.dark a.border.border-slate-200:hover {
+  background-color: #1a1a20 !important;
+  border-color: rgba(255, 255, 255, 0.22) !important;
+}
+
+/* Hover Utilities */
+.dark .hover\:bg-slate-50:hover {
+  background-color: rgba(255, 255, 255, 0.06) !important;
+}
+
+.dark .hover\:bg-slate-100:hover {
+  background-color: rgba(255, 255, 255, 0.08) !important;
+}
+
+.dark .hover\:bg-slate-200:hover {
+  background-color: rgba(255, 255, 255, 0.12) !important;
+}
+
+.dark .hover\:text-slate-900:hover {
+  color: #ffffff !important;
+}
+
+.dark .hover\:text-slate-700:hover {
+  color: #f4f4f5 !important;
+}
+
+.dark .hover\:border-slate-300:hover {
+  border-color: rgba(255, 255, 255, 0.2) !important;
+}
+
+/* Gradients */
+.dark .from-slate-50 {
+  --tw-gradient-from: #09090b var(--tw-gradient-from-position) !important;
+  --tw-gradient-to: rgb(9 9 11 / 0) var(--tw-gradient-to-position) !important;
+  --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to) !important;
+}
+
+.dark .from-slate-100 {
+  --tw-gradient-from: #16161a var(--tw-gradient-from-position) !important;
+  --tw-gradient-to: rgb(22 22 26 / 0) var(--tw-gradient-to-position) !important;
+  --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to) !important;
+}
+
+.dark .to-white {
+  --tw-gradient-to: #09090b var(--tw-gradient-to-position) !important;
+}
+
+.dark .to-slate-50 {
+  --tw-gradient-to: #0d0d10 var(--tw-gradient-to-position) !important;
+}
+
+.dark .gradient-text {
+  background-image: linear-gradient(135deg, #ffffff 0%, #a1a1aa 100%) !important;
+}
+
+/* Accent Tag Chips */
+.dark .bg-blue-50 {
+  background-color: rgba(59, 130, 246, 0.1) !important;
+}
+
+.dark .bg-blue-100 {
+  background-color: rgba(59, 130, 246, 0.18) !important;
+}
+
+.dark .text-blue-700 {
+  color: #93c5fd !important;
+}
+
+.dark .text-blue-600 {
+  color: #60a5fa !important;
+}
+
+.dark .border-blue-100 {
+  border-color: rgba(59, 130, 246, 0.22) !important;
+}
+
+.dark .hover\:bg-blue-100:hover {
+  background-color: rgba(59, 130, 246, 0.2) !important;
+}
+
+.dark .bg-emerald-50 {
+  background-color: rgba(16, 185, 129, 0.1) !important;
+}
+
+.dark .bg-emerald-100 {
+  background-color: rgba(16, 185, 129, 0.18) !important;
+}
+
+.dark .text-emerald-700 {
+  color: #6ee7b7 !important;
+}
+
+.dark .text-emerald-600 {
+  color: #34d399 !important;
+}
+
+.dark .border-emerald-100 {
+  border-color: rgba(16, 185, 129, 0.22) !important;
+}
+
+.dark .hover\:bg-emerald-100:hover {
+  background-color: rgba(16, 185, 129, 0.2) !important;
+}
+
+.dark .text-indigo-600 {
+  color: #818cf8 !important;
+}
+
+/* Certificates Carousel & Lightbox Controls */
+.dark .bg-white\/95 {
+  background-color: rgba(18, 18, 21, 0.9) !important;
+  color: #f4f4f5 !important;
+  border-color: rgba(255, 255, 255, 0.12) !important;
+}
+
+.dark .bg-white\/95:hover {
+  background-color: #222228 !important;
+  color: #ffffff !important;
+}
+
+.dark .shadow-slate-100\/40 {
+  --tw-shadow-color: transparent !important;
+}
+
+.dark .bg-slate-800 {
+  background-color: #3b82f6 !important;
+}
+
+.dark .bg-slate-300 {
+  background-color: #27272a !important;
+}
+
+.dark .hover\:bg-slate-400:hover {
+  background-color: #3f3f46 !important;
+}
+
+/* Photo indicators in About carousel overlay */
+.dark .aspect-square .bg-white {
+  background-color: #ffffff !important;
+}
+
+/* Experience Timeline Line & Dots */
+.dark span.bg-slate-200 {
+  background-color: #27272a !important;
+}
+
+/* Contact Inputs & Textarea */
+.dark input,
+.dark textarea {
+  background-color: #121215 !important;
+  color: #f4f4f5 !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+}
+
+.dark input::placeholder,
+.dark textarea::placeholder {
+  color: #71717a !important;
+}
+
+.dark input:focus,
+.dark textarea:focus {
+  border-color: #3b82f6 !important;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2) !important;
+  outline: none !important;
+}

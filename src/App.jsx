@@ -34,9 +34,9 @@ function App() {
   }, [])
 
   return (
-    <div className="min-h-screen bg-[#fafafa]" style={{ minHeight: '100vh', backgroundColor: '#fafafa' }}>
+    <div className="min-h-screen bg-[#fafafa] dark:bg-[#09090b]">
       <Navigation activeSection={activeSection} />
-      <main style={{ backgroundColor: '#fafafa' }}>
+      <main>
         <Hero />
         <About />
         <Experience />

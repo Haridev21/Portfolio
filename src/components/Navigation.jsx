@@ -1,9 +1,15 @@
 import { useState, useEffect } from 'react'
-import { Menu, X } from 'lucide-react'
+import { Menu, X, Sun, Moon } from 'lucide-react'
 
 const Navigation = ({ activeSection }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [isScrolled, setIsScrolled] = useState(false)
+  const [isDark, setIsDark] = useState(() => {
+    if (typeof document !== 'undefined') {
+      return document.documentElement.classList.contains('dark')
+    }
+    return false
+  })
 
   useEffect(() => {
     const handleScroll = () => {
@@ -12,6 +18,20 @@ const Navigation = ({ activeSection }) => {
     window.addEventListener('scroll', handleScroll)
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
+
+  const toggleTheme = () => {
+    const nextDark = !isDark
+    setIsDark(nextDark)
+    try {
+      if (nextDark) {
+        document.documentElement.classList.add('dark')
+        localStorage.setItem('theme', 'dark')
+      } else {
+        document.documentElement.classList.remove('dark')
+        localStorage.setItem('theme', 'light')
+      }
+    } catch (e) {}
+  }
 
   const navItems = [
     { id: 'home', label: 'Home', number: '01' },
@@ -46,7 +66,6 @@ const Navigation = ({ activeSection }) => {
           <button
             onClick={() => scrollToSection('home')}
             className="text-xl md:text-2xl font-display font-bold text-slate-900 hover:text-slate-700 transition-colors tracking-tight"
-            style={{ color: '#0f172a' }}
           >
             Haridev M
           </button>
@@ -76,16 +95,37 @@ const Navigation = ({ activeSection }) => {
                 </button>
               )
             })}
+
+            {/* Desktop Theme Toggle */}
+            <button
+              onClick={toggleTheme}
+              aria-label="Toggle theme"
+              className="p-2 text-slate-600 hover:text-slate-900 hover:bg-slate-100 rounded-full transition-all duration-300 ml-1"
+            >
+              {isDark ? <Sun size={19} /> : <Moon size={19} />}
+            </button>
           </div>
 
-          {/* Mobile Menu Button */}
-          <button
-            onClick={() => setIsMenuOpen(!isMenuOpen)}
-            className="md:hidden text-slate-600 p-2 hover:text-slate-900 hover:bg-slate-100 rounded-lg transition-all duration-300"
-            aria-label="Toggle menu"
-          >
-            {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
-          </button>
+          {/* Mobile Right Actions */}
+          <div className="flex md:hidden items-center gap-1">
+            {/* Mobile Theme Toggle */}
+            <button
+              onClick={toggleTheme}
+              aria-label="Toggle theme"
+              className="p-2 text-slate-600 hover:text-slate-900 hover:bg-slate-100 rounded-full transition-all duration-300"
+            >
+              {isDark ? <Sun size={20} /> : <Moon size={20} />}
+            </button>
+
+            {/* Mobile Menu Button */}
+            <button
+              onClick={() => setIsMenuOpen(!isMenuOpen)}
+              className="text-slate-600 p-2 hover:text-slate-900 hover:bg-slate-100 rounded-lg transition-all duration-300"
+              aria-label="Toggle menu"
+            >
+              {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
+            </button>
+          </div>
         </div>
 
         {/* Mobile Navigation */}
