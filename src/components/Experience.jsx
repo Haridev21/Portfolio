@@ -131,13 +131,12 @@ const Experience = () => {
               <h3 className="text-xl font-bold text-slate-900">Experience</h3>
             </div>
 
-            <div className="relative border-l-2 border-slate-200 pl-8 space-y-8">
+            <div className="relative space-y-8">
+              <span className="absolute left-[7px] top-2 bottom-2 w-0.5 bg-slate-200" aria-hidden="true" />
               {experiences.map((exp) => (
-                <div key={exp.id} className="relative">
+                <div key={exp.id} className="relative pl-10 md:pl-12">
                   {/* Timeline dot */}
-                  <div className="absolute -left-[2.65rem] top-6 w-4 h-4 rounded-full bg-white border-2 border-blue-400 flex items-center justify-center">
-                    <div className="w-1.5 h-1.5 rounded-full bg-blue-400" />
-                  </div>
+                  <span className="absolute left-0 top-7 w-4 h-4 rounded-full bg-white border-4 border-blue-500 z-10" />
 
                   <div className="exp-card opacity-0 rounded-2xl border border-slate-200 bg-white p-6 md:p-8 hover:border-slate-300 hover:shadow-md transition-all duration-300">
                     {/* Role + meta */}
@@ -194,13 +193,12 @@ const Experience = () => {
               <h3 className="text-xl font-bold text-slate-900">Education</h3>
             </div>
 
-            <div className="relative border-l-2 border-slate-200 pl-8 space-y-8">
+            <div className="relative space-y-8">
+              <span className="absolute left-[7px] top-2 bottom-2 w-0.5 bg-slate-200" aria-hidden="true" />
               {education.map((edu) => (
-                <div key={edu.id} className="relative">
+                <div key={edu.id} className="relative pl-10 md:pl-12">
                   {/* Timeline dot */}
-                  <div className="absolute -left-[2.65rem] top-6 w-4 h-4 rounded-full bg-white border-2 border-emerald-400 flex items-center justify-center">
-                    <div className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
-                  </div>
+                  <span className="absolute left-0 top-7 w-4 h-4 rounded-full bg-white border-4 border-emerald-500 z-10" />
 
                   <div className="exp-card opacity-0 rounded-2xl border border-slate-200 bg-white p-6 md:p-8 hover:border-slate-300 hover:shadow-md transition-all duration-300">
                     <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-2">
