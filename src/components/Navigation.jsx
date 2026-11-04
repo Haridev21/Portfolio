@@ -16,11 +16,12 @@ const Navigation = ({ activeSection }) => {
   const navItems = [
     { id: 'home', label: 'Home', number: '01' },
     { id: 'about', label: 'About', number: '02' },
-    { id: 'designs', label: 'Designs', number: '03' },
-    { id: 'projects', label: 'Projects', number: '04' },
-    { id: 'skills', label: 'Skills', number: '05' },
-    { id: 'certificates', label: 'Certificates', number: '06' },
-    { id: 'contact', label: 'Contact', number: '07' },
+    { id: 'experience', label: 'Experience', number: '03' },
+    { id: 'designs', label: 'Designs', number: '04' },
+    { id: 'projects', label: 'Projects', number: '05' },
+    { id: 'skills', label: 'Skills', number: '06' },
+    { id: 'certificates', label: 'Certificates', number: '07' },
+    { id: 'contact', label: 'Contact', number: '08' },
   ]
 
   const scrollToSection = (sectionId) => {
@@ -41,7 +42,7 @@ const Navigation = ({ activeSection }) => {
     >
       <div className="container-custom">
         <div className="flex items-center justify-between h-20 md:h-24">
-          {/* Logo - Clean Typography */}
+          {/* Logo */}
           <button
             onClick={() => scrollToSection('home')}
             className="text-xl md:text-2xl font-display font-bold text-slate-900 hover:text-slate-700 transition-colors tracking-tight"
@@ -50,7 +51,7 @@ const Navigation = ({ activeSection }) => {
             Haridev M
           </button>
 
-          {/* Desktop Navigation - Numbered Style */}
+          {/* Desktop Navigation */}
           <div className="hidden md:flex items-center gap-1">
             {navItems.map((item) => {
               const isActive = activeSection === item.id
@@ -87,10 +88,10 @@ const Navigation = ({ activeSection }) => {
           </button>
         </div>
 
-        {/* Mobile Navigation - Clean Slide Down */}
+        {/* Mobile Navigation */}
         <div
           className={`md:hidden overflow-hidden transition-all duration-300 ${
-            isMenuOpen ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'
+            isMenuOpen ? 'max-h-[32rem] opacity-100' : 'max-h-0 opacity-0'
           }`}
         >
           <div className="py-4 space-y-2">
