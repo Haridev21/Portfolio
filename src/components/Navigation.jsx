@@ -16,10 +16,11 @@ const Navigation = ({ activeSection }) => {
   const navItems = [
     { id: 'home', label: 'Home', number: '01' },
     { id: 'about', label: 'About', number: '02' },
-    { id: 'projects', label: 'Projects', number: '03' },
-    { id: 'skills', label: 'Skills', number: '04' },
-    { id: 'certificates', label: 'Certificates', number: '05' },
-    { id: 'contact', label: 'Contact', number: '06' },
+    { id: 'designs', label: 'Designs', number: '03' },
+    { id: 'projects', label: 'Projects', number: '04' },
+    { id: 'skills', label: 'Skills', number: '05' },
+    { id: 'certificates', label: 'Certificates', number: '06' },
+    { id: 'contact', label: 'Contact', number: '07' },
   ]
 
   const scrollToSection = (sectionId) => {
@@ -57,7 +58,7 @@ const Navigation = ({ activeSection }) => {
                 <button
                   key={item.id}
                   onClick={() => scrollToSection(item.id)}
-                  className={`relative px-4 py-2 rounded-lg transition-all duration-300 group ${
+                  className={`relative px-3 py-2 rounded-lg transition-all duration-300 group ${
                     isActive
                       ? 'text-slate-900'
                       : 'text-slate-600 hover:text-slate-900'
