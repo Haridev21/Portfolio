@@ -81,7 +81,7 @@ const Hero = () => {
                 <span className="block text-slate-900">Hello, I'm</span>
                 <span className="block mt-2 text-slate-900">Haridev M</span>
                 <span className="block text-2xl md:text-5xl mt-4 font-normal text-slate-600">
-                  Full Stack Developer
+                  Full Stack Developer & UI Designer
                 </span>
               </h1>
             </div>
