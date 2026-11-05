@@ -60,7 +60,7 @@ const Navigation = ({ activeSection }) => {
           : 'bg-transparent'
       }`}
     >
-      <div className="container-custom">
+      <div className="container-custom px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-20 md:h-24">
           {/* Logo */}
           <button
