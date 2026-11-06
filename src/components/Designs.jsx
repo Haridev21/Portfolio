@@ -57,6 +57,27 @@ const designs = [
     imageStyle: 'phone',
     gridCols: 'grid-cols-2 sm:grid-cols-3 lg:grid-cols-4',
   },
+  {
+    id: 4,
+    title: 'AI-Powered Smart Gym Monitoring and Personalized Fitness System – App UI',
+    tags: ['Final Year Project', 'Google Stitch', 'AI-Assisted', 'Mobile UI', 'Design System'],
+    description:
+      'Mobile app UI for our B.Tech final year project, an AI-powered gym monitoring and fitness system with six modules: posture analysis, progress tracking, AI meal prep, IoT health monitoring, Gym Buddy voice assistant and workout partner matching. Our team of four designed the screens in Google Stitch with a minimal design system (white and off-white surfaces, one dark green accent, Inter type) and implemented them in the project\'s Flutter app.',
+    images: [
+      { src: '/designs/formfit/02-home.png', alt: 'Smart gym app home screen', caption: 'Home' },
+      { src: '/designs/formfit/03-exercise_select.png', alt: 'Smart gym app exercise selection screen', caption: 'Train' },
+      { src: '/designs/formfit/04-progress_dashboard.png', alt: 'Smart gym app progress dashboard', caption: 'Progress' },
+      { src: '/designs/formfit/05-weekly_meal_plan.png', alt: 'Smart gym app weekly meal plan', caption: 'Meals' },
+      { src: '/designs/formfit/06-connect_device.png', alt: 'Smart gym app wearable device pairing screen', caption: 'Device pairing' },
+    ],
+    figmaUrl: '',
+    prototypeUrl: 'https://stitch.withgoogle.com/projects/12884148239076514362',
+    prototypeLabel: 'View in Stitch',
+    codeUrl: '',
+    imageStyle: 'phone',
+    gridCols: 'grid-cols-2 sm:grid-cols-3 lg:grid-cols-5',
+    titleWrap: true,
+  },
 ]
 
 // Tracks which image wrappers have errored so we can hide them
@@ -157,13 +178,13 @@ const Designs = () => {
               <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-4 mb-2">
                 {/* Left: icon + title + description */}
                 <div className="min-w-0">
-                  <div className="flex items-center gap-2 mb-2">
-                    <Palette className="w-5 h-5 text-slate-400 flex-shrink-0" />
-                    <h3 className="text-lg font-semibold text-slate-900">
+                  <div className={`flex gap-2 mb-2 ${design.titleWrap ? 'items-start' : 'items-center'}`}>
+                    <Palette className={`w-5 h-5 text-slate-400 flex-shrink-0 ${design.titleWrap ? 'mt-0.5' : ''}`} />
+                    <h3 className={`text-lg font-semibold text-slate-900 ${design.titleWrap ? 'min-w-0 break-words' : ''}`}>
                       {design.title}
                     </h3>
                   </div>
-                  <p className="text-sm text-slate-500 leading-relaxed max-w-2xl">
+                  <p className="text-sm text-slate-500 leading-relaxed max-w-2xl text-left sm:text-justify hyphens-auto">
                     {design.description}
                   </p>
                 </div>
@@ -205,7 +226,7 @@ const Designs = () => {
                         className="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium text-emerald-700 bg-emerald-50 border border-emerald-100 rounded-lg hover:bg-emerald-100 transition-colors"
                       >
                         <ArrowUpRight className="w-3 h-3" />
-                        View prototype
+                        {design.prototypeLabel || 'View prototype'}
                       </a>
                     )}
                     {design.codeUrl && (
